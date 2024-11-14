@@ -63,4 +63,19 @@ var app = http.createServer(function(request, response){
             });
         });
     } else if(pathname === '/update'){
-        fs.readdir('./data', function(error, file
+        fs.readdir('./data', function(error, filelist){
+            var title = 'Welcome';
+            var description = 'Hello, Node.js';
+            var list = template.list();
+            var html = template.HTML(title, list,
+                `<h2>${title}</h2>${description}`,
+                `<a href="/create">create</a>`
+            );
+            response.writeHead(200);
+            response.end(html);
+        });
+    } else {
+        response.writeHead(404);
+        response.end('Not found');
+    }
+});
